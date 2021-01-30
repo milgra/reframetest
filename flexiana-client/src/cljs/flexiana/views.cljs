@@ -7,21 +7,19 @@
 
 (defn main-panel
   []
-  (let [name (rf/subscribe [::subs/name])
-        success (rf/subscribe [::subs/success])]
+  (let [remote-result (rf/subscribe [::subs/remote-result])]
     [:div
-     [:h1 "Hello from " @name]
      [:div "Enter string 1"]
      [:input {:type "text"
-              :value @(rf/subscribe [::subs/string1])
-              :on-change #(rf/dispatch [::events/string1-change (-> % .-target .-value)])}]
+              :value @(rf/subscribe [::subs/str1])
+              :on-change #(rf/dispatch [::events/str1-change (-> % .-target .-value)])}]
      [:div "Enter string 2"]
      [:input {:type "text"
-              :value @(rf/subscribe [::subs/string2])
-              :on-change #(rf/dispatch [::events/string2-change (-> % .-target .-value)])}]
+              :value @(rf/subscribe [::subs/str2])
+              :on-change #(rf/dispatch [::events/str2-change (-> % .-target .-value)])}]
      [:div]
      [:input {:type "button"
-              :value "Check"
+              :value "Submit"
               :on-click #(rf/dispatch [::events/send-button-press])}]
      [:div]
-     [:h1 "Success : " @success]]))
+     [:h1 @remote-result]]))

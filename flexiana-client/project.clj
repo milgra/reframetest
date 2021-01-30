@@ -32,35 +32,11 @@
                                :devtools {:http-root "resources/public"
                                           :http-port 8280}}}}
 
-  :shell {:commands {"karma" {:windows         ["cmd" "/c" "karma"]
-                              :default-command "karma"}
-                     "open"  {:windows         ["cmd" "/c" "start"]
-                              :macosx          "open"
-                              :linux           "xdg-open"}}}
-
-  :aliases {"dev"          ["do"
-                            ["shell" "echo" "\"DEPRECATED: Please use lein watch instead.\""]
-                            ["watch"]]
-            "watch"        ["with-profile" "dev" "do"
+  :aliases {"watch"        ["with-profile" "dev" "do"
                             ["shadow" "watch" "app" "browser-test" "karma-test"]]
 
-            "prod"         ["do"
-                            ["shell" "echo" "\"DEPRECATED: Please use lein release instead.\""]
-                            ["release"]]
-
             "release"      ["with-profile" "prod" "do"
-                            ["shadow" "release" "app"]]
-
-            "build-report" ["with-profile" "prod" "do"
-                            ["shadow" "run" "shadow.cljs.build-report" "app" "target/build-report.html"]
-                            ["shell" "open" "target/build-report.html"]]
-
-            "karma"        ["do"
-                            ["shell" "echo" "\"DEPRECATED: Please use lein ci instead.\""]
-                            ["ci"]]
-            "ci"           ["with-profile" "prod" "do"
-                            ["shadow" "compile" "karma-test"]
-                            ["shell" "karma" "start" "--single-run" "--reporters" "junit,dots"]]}
+                            ["shadow" "release" "app"]]}
 
   :profiles
   {:dev

@@ -4,24 +4,18 @@
 
 
 (rf/reg-sub
-  ::name
+  ::str1
   (fn [db]
-    (:name db)))
+    (:str1 db)))
 
 
 (rf/reg-sub
-  ::string1
+  ::str2
   (fn [db]
-    (:string1 db)))
+    (:str2 db)))
 
 
 (rf/reg-sub
-  ::string2
+  ::remote-result
   (fn [db]
-    (:string2 db)))
-
-
-(rf/reg-sub
-  ::success
-  (fn [db]
-    (:success_http_result db)))
+    (:remote-result db)))
