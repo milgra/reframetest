@@ -33,7 +33,7 @@
                                           :http-port 8280}}}}
 
   :aliases {"watch"        ["with-profile" "dev" "do"
-                            ["shadow" "watch" "app" "browser-test" "karma-test"]]
+                            ["shadow" "watch" "app"]]
 
             "release"      ["with-profile" "prod" "do"
                             ["shadow" "release" "app"]]}
