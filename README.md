@@ -1,6 +1,6 @@
 # Flexiana Test Task
 
-Checks if characters in a portion of a string can be rearranged to to match an other string.
+Checks if characters in a portion of a string can be rearranged to match an other string.
 
 Starting up the sever
 

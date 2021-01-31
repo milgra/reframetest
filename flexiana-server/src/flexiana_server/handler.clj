@@ -7,20 +7,27 @@
     [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 
+(defn substract-frequencies
+  [fr1 fr2]
+  (reduce (fn [res key]
+            (let [fr1cnt (get fr1 key)
+                  fr2cnt (get fr2 key)]
+              (if (nil? fr2cnt) ;; fr2 doesn't have this letter
+                (merge res {key fr1cnt})
+                (if (< fr2cnt fr1cnt) ;; fr2 has less letters from this kind
+                  (merge res {key (- fr1cnt fr2cnt)})
+                  res))))
+          []
+          (keys fr1)))
+
+
 (defn chars-in-string?
   [str1 str2]
   (if (and (> (count str1) 0)
            (> (count str2) 0))
     (let [fr1 (frequencies str1)
           fr2 (frequencies str2)
-          sub (reduce (fn [prt key]
-                        (let [fr1cnt (get fr1 key)
-                              fr2cnt (get fr2 key)]
-                          (if (nil? fr2cnt) ;; fr2 doesn't have this letter
-                            (concat prt (take fr1cnt (repeat key)))
-                            (if (< fr2cnt fr1cnt) ;; fr2 has less letters from this kind
-                              (concat prt (take (- fr1cnt fr2cnt) (repeat key)))
-                              prt)))) [] (keys fr1))]
+          sub (substract-frequencies fr1 fr2)]
       (empty? sub))
     false))
 

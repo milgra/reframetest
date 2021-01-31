@@ -33,18 +33,18 @@
                            :str2 (:str2 db)}
                   :format          (ajax/json-request-format)
                   :response-format (ajax/json-response-format {:keywords? true})
-                  :on-success      [::success-get-result]
-                  :on-failure      [::failure-get-result]}
+                  :on-success      [::remote-result-success]
+                  :on-failure      [::remote-result-failure]}
      :db (assoc db :loading? true)}))
 
 
 (rf/reg-event-db
-  ::success-get-result
+  ::remote-result-success
   (fn [db [_ {:keys [result]}]]
     (assoc db :remote-result (str result))))
 
 
 (rf/reg-event-db
-  ::failure-get-result
+  ::remote-result-failure
   (fn [db [_ response]]
     (assoc db :remote-result "server error")))
